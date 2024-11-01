@@ -1,0 +1,9 @@
+To activate venv: Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope Process
+
+To Run project:  uvicorn main:app --reload
+//NOTE: main->main.py, app->app = FASTAPI(); these names can be changed
+
+
+Access the API Documentation: 
+(fastapi provides its own postman type web app)
+Swagger UI: http://127.0.0.1:8000/docs
