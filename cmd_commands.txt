@@ -1,4 +1,5 @@
-To activate venv: Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope Process
+To activate venv: 
+Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope Process
 
 To Run project:  uvicorn main:app --reload
 //NOTE: main->main.py, app->app = FASTAPI(); these names can be changed
