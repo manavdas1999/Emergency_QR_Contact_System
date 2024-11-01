@@ -1,5 +1,5 @@
 import os
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Form
 from fastapi.responses import FileResponse
 import qrcode
 import jwt   # for encoding JWTs
@@ -46,6 +46,21 @@ def create_jwt(user_id: str):
     return token
 
 
+# Endpoint for user registration
+@app.post("/register")
+def register_user(name: str = Form(...), contact: str = Form(...), email: str = Form(...)):
+    # Here, you'd typically store the user's data in a database.
+    # For demonstration, we store it in the dictionary.
+
+    user_id = f"user{len(users_data)+1}"
+    users_data[user_id] = {
+        "name": name,
+        "contact": contact,
+        "email": email
+    }
+
+    return {"message": "User registered successfully", "user_id": user_id}
+
 # Endpoint tp generate QR code
 @app.get("/generate_qr/{user_id}")
 def generate_qr(user_id: str):
@@ -73,7 +88,7 @@ def generate_qr(user_id: str):
 
 
 # Endpoint to access emergency contact info (secured by JWT)
-@app.get("/emergeny_contact")
+@app.get("/emergency_contact")
 def get_emergency_contact(token: str):
     try:
         # Decode the JWT token
